@@ -36,9 +36,21 @@ jobs:
       # run tests!
       - run: yarn test
 
+deploy-job:
+  working_directory: /tmp/area-c
+  steps:
+    - run:
+        name: Deploy to S3 if tests pass and branch is Master
+        command: aws s3 sync /home/ubuntu/area-c s3://areac-c-dev --delete
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build-job
       - deploy-job:
-          working_directory: /tmp/area-c
-          steps:
-            - run:
-                name: Deploy to S3 if tests pass and branch is Master
-                command: aws s3 sync /home/ubuntu/area-c s3://areac-c-dev --delete
+          requires:
+            - build-job
+          filters:
+            branches:
+              only: master
