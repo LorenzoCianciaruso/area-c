@@ -38,6 +38,8 @@ jobs:
 
   deploy:
     working_directory: /tmp/area-c
+    docker:
+      - image: circleci/php:latest
     steps:
       - run:
           name: Deploy to S3 if tests pass and branch is Master
