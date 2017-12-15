@@ -14,7 +14,7 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
 
-    working_directory: ~/repo
+    working_directory: /tmp/area-c
 
     steps:
       - checkout
@@ -43,7 +43,7 @@ jobs:
     steps:
       - run:
           name: Deploy to S3 if tests pass and branch is Master
-          command: aws s3 sync ~/repo s3://areac-c-dev --delete
+          command: aws s3 sync . s3://area-c-dev --delete
 
 
 workflows:
