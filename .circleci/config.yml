@@ -36,7 +36,7 @@ jobs:
       # run tests!
       - run: yarn test
 
-deploy-job:
+deploy:
   working_directory: /tmp/area-c
   steps:
     - run:
@@ -47,8 +47,8 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build-job
-      - deploy-job:
+      - build
+      - deploy:
           requires:
             - build-job
           filters:
