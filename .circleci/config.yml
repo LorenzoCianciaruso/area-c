@@ -39,11 +39,11 @@ jobs:
   deploy:
     working_directory: /tmp/area-c
     docker:
-      - image: circleci/php:latest
+      - image: rhinogram/node-awscli
     steps:
       - run:
           name: Deploy to S3 if tests pass and branch is Master
-          command: aws s3 sync /home/ubuntu/area-c s3://areac-c-dev --delete
+          command: aws s3 sync ~/repo s3://areac-c-dev --delete
 
 
 workflows:
