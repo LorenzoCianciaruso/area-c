@@ -4,6 +4,9 @@
 #
 version: 2
 jobs:
+  dependencies:
+    override:
+        - sudo pip install awscli
   build:
     docker:
       # specify the version you desire here
@@ -35,3 +38,9 @@ jobs:
 
       # run tests!
       - run: yarn test
+
+  deployment:
+    development:
+      branch: master
+      commands:
+        - aws s3 sync /home/ubuntu/area-c s3://areac-c-dev --delete
