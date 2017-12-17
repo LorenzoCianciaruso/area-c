@@ -36,26 +36,8 @@ jobs:
       # run tests!
       - run: npm test
 
+      - run: npm run build
+
       - run:
           name: Deploy to S3 if tests pass and branch is Master
-          command: aws s3 sync . s3://area-c-dev --delete
-
-  # deploy:
-  #   working_directory: /tmp/area-c
-  #   steps:
-  #     - run:
-  #         name: Deploy to S3 if tests pass and branch is Master
-  #         command: aws s3 sync . s3://area-c-dev --delete
-
-
-# workflows:
-#   version: 2
-#   build-and-deploy:
-#     jobs:
-#       - build
-#       - deploy:
-#           requires:
-#             - build
-#           filters:
-#             branches:
-#               only: master
+          command: aws s3 sync ./build s3://area-c-dev --delete
